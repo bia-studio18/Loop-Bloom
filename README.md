@@ -34,8 +34,6 @@ Cute handmade accessories store — Scrunchies, Bracelets & Mini Bags.
 2. Password: `loopbloom123`
 3. Add your real products with image links
 
-**Tip for images:**  
-Upload photos to [Imgur](https://imgur.com) or Google Drive → Copy the direct image link → Paste in Admin.
 
 ---
 
