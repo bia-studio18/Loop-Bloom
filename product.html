@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | Loop & Bloom</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product-detail {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .product-detail-img {
+            background: linear-gradient(135deg, #FFE0CC, #FFE4EC);
+            border-radius: 24px;
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .product-detail-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-detail-info h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .product-detail-info .category {
+            color: var(--pink);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .product-detail-info .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+        .product-detail-info p {
+            color: var(--text-light);
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+        .product-detail-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 768px) {
+            .product-detail {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .product-detail-img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-spa"></i> Loop <span>&</span> Bloom
+            </a>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="https://www.instagram.com/loop_bloom.pk/" target="_blank">Instagram</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" style="display:none;">0</span>
+                </a>
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="product-detail" id="product-detail">
+        <!-- Loaded by JavaScript -->
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3><i class="fas fa-spa"></i> Loop & Bloom</h3>
+                <p>Handmade with love.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="cart.html">Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <a href="https://www.instagram.com/loop_bloom.pk/" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Loop & Bloom</span>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const product = getProductById(id);
+            const container = document.getElementById('product-detail');
+            
+            if (!product) {
+                container.innerHTML = `
+                    <div style="grid-column:1/-1;text-align:center;padding:60px 20px;">
+                        <h2>Product not found</h2>
+                        <p style="margin:16px 0;color:#8B7E78;">This product may have been removed.</p>
+                        <a href="shop.html" class="btn btn-primary">Back to Shop</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            document.title = product.name + ' | Loop & Bloom';
+            
+            container.innerHTML = `
+                <div class="product-detail-img">
+                    ${product.image 
+                        ? `<img src="${product.image}" alt="${product.name}">` 
+                        : `<i class="fas fa-heart" style="font-size:80px;color:#FFB6C1;"></i>`
+                    }
+                </div>
+                <div class="product-detail-info">
+                    <div class="category">${product.category}</div>
+                    <h1>${product.name}</h1>
+                    <div class="price">${formatPrice(product.price)}</div>
+                    <p>${product.description || 'Handmade with love by Loop & Bloom.'}</p>
+                    <div class="product-detail-actions">
+                        <button class="btn btn-primary" onclick="addToCart(${product.id})">
+                            <i class="fas fa-shopping-bag"></i> Add to Cart
+                        </button>
+                        <a href="https://www.instagram.com/loop_bloom.pk/" target="_blank" class="btn btn-secondary">
+                            <i class="fab fa-instagram"></i> Order on Instagram
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

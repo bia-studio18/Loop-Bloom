@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Loop & Bloom</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div id="login-section">
+        <div class="admin-login">
+            <h2><i class="fas fa-spa"></i> Loop & Bloom</h2>
+            <p>Admin Panel — Enter password to continue</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+                    <i class="fas fa-lock"></i> Login
+                </button>
+            </form>
+            
+            <p style="margin-top:20px;font-size:12px;color:#aaa;">
+                Default password: <strong>loopbloom123</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-section" style="display:none;">
+        <header>
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-spa"></i> Loop <span>&</span> Bloom
+                </a>
+                <div class="nav-actions">
+                    <a href="index.html" class="btn btn-secondary btn-sm">View Store</a>
+                    <button id="logout-btn" class="btn btn-primary btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1><i class="fas fa-cog"></i> Admin Panel</h1>
+            </div>
+
+            <!-- Add / Edit Product Form -->
+            <div class="admin-form">
+                <h3 id="form-title">Add New Product</h3>
+                
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Product Name *</label>
+                            <input type="text" id="product-name" placeholder="e.g. Blush Satin Scrunchie" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="product-category" required>
+                                <option value="Scrunchies">Scrunchies</option>
+                                <option value="Bracelets">Bracelets</option>
+                                <option value="Mini Bags">Mini Bags</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Price (PKR) *</label>
+                            <input type="number" id="product-price" placeholder="e.g. 350" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Badge (optional)</label>
+                            <input type="text" id="product-badge" placeholder="e.g. New, Bestseller, Sale">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+                            <div>
+                                <label for="product-image-file" style="
+                                    display:inline-flex;
+                                    align-items:center;
+                                    gap:8px;
+                                    background:#FF6B9D;
+                                    color:white;
+                                    padding:12px 20px;
+                                    border-radius:12px;
+                                    cursor:pointer;
+                                    font-size:14px;
+                                    font-weight:500;
+                                ">
+                                    <i class="fas fa-image"></i> Choose from Gallery
+                                </label>
+                                <input type="file" id="product-image-file" accept="image/*" style="display:none;">
+                                <input type="hidden" id="product-image">
+                                <p style="font-size:12px;color:#8B7E78;margin-top:8px;">
+                                    Select photo from your phone or computer
+                                </p>
+                            </div>
+                            <div id="image-preview" style="
+                                width:100px;
+                                height:100px;
+                                border-radius:12px;
+                                background:#FFE0CC;
+                                display:none;
+                                align-items:center;
+                                justify-content:center;
+                                overflow:hidden;
+                                border:2px solid #FFB6C1;
+                            ">
+                                <img id="preview-img" style="width:100%;height:100%;object-fit:cover;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="product-description" rows="3" placeholder="Short description of the product..."></textarea>
+                    </div>
+                    
+                    <div style="display:flex;gap:12px;margin-top:8px;">
+                        <button type="submit" id="submit-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Product
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                            Clear
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Products List -->
+            <h3 style="margin-bottom:16px;font-size:18px;">All Products</h3>
+            <div class="admin-products" id="admin-products-list">
+                <!-- Loaded by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
