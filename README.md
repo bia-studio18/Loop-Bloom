@@ -29,10 +29,7 @@ Cute handmade accessories store — Scrunchies, Bracelets & Mini Bags.
 4. Order details are copied → Paste in Instagram DM
 
 ### Admin Panel
-
-1. Open `admin.html`
-2. Password: `loopbloom123`
-3. Add your real products with image links
+Add your real products with image links
 
 
 ---
